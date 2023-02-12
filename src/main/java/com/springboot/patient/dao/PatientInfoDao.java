@@ -1,20 +1,21 @@
 package com.springboot.patient.dao;
 
-import com.springboot.patient.model.Img;
 import com.springboot.patient.model.Patient;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Mapper
 public interface PatientInfoDao {
 
-//    List<Patient> selectPatient(Patient patientInfoDto);
-    Patient insertPatient(Patient patient);
+    int insertPatient(Patient patient);
 
-    Img insertImg(Img img);
+    int updateImg(Patient patient, String s);
 
-    Img uploadImg(MultipartFile file);
+    List<Patient> selectPatient(String patient_name);
+
+    String selectUrl(int patient_seq);
+
+    int delPatient(int patient_seq);
 }
+

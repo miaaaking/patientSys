@@ -4,17 +4,24 @@
 
     <insert id="insertPatient">
         insert into patient
-        (patient_code, patient_name, patient_age, patient_sex, disease_yn)
+            (patient_code, patient_name, patient_age, patient_sex, disease_yn)
         values (#{patient_code},#{patient_name},#{patient_age},#{patient_sex},#{disease_yn});
     </insert>
 
-    <insert id="insertImg">
-        insert into patient
-            (patient_code, patient_name, patient_age, patient_sex, disease_yn)
-        values (#{patient_code}+, #{patient_name},#{patient_age},#{patient_sex},#{disease_yn});
-    </insert>
+    <update id="updateImg" parameterType="int">
+        update patient set img_url = #{img_url} where patient_seq = #{patient_seq};
+    </update>
 
-<!--    <select id="selectPatient" resultType="com.springboot.patient.model.Patient">-->
-<!--        select * from patient_info;-->
-<!--    </select>-->
+    <select id="selectPatient" resultType="com.springboot.patient.model.Patient" parameterType="String">
+        select * from patient where img_url is not null and patient_name like CONCAT('%', #{patient_name}, '%');
+    </select>
+
+    <select id="selectUrl" resultType="String" parameterType="int">
+        select img_url from patient where img_url is not null and patient_seq = #{patient_seq};
+    </select>
+
+    <delete id="delPatient" parameterType="int">
+        select img_url from patient where img_url is not null and patient_seq = #{patient_seq};
+    </delete>
+
 </mapper>
